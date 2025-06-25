@@ -1,36 +1,40 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Blog</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Blog</h1>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+  <header>
+    <h1>Welcome to My Blog</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-    <main>
-        <section id="blog-posts">
-            <article class="post">
-                <h2>Blog Post Title</h2>
-                <p>This is a blog post content...</p>
-            </article>
-            <article class="post">
-                <h2>Another Blog Post</h2>
-                <p>Here's another blog post content...</p>
-            </article>
-        </section>
-    </main>
+  <main>
+    <!-- 1️⃣ New post form -->
+    <section id="new-post">
+      <form id="post-form">
+        <textarea id="post-input" placeholder="What's on your mind?" required></textarea>
+        <button type="submit">Post</button>
+      </form>
+    </section>
 
-    <footer>
-        <p>&copy; 2025 My Blog</p>
-    </footer>
+    <!-- 2️⃣ Posts will be injected here -->
+    <section id="blog-posts"></section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 My Blog</p>
+  </footer>
+
+  <!-- Include the posting script -->
+  <script src="script.js"></script>
 </body>
 </html>
