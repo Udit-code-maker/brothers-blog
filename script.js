@@ -6,7 +6,7 @@ const input = document.getElementById('post-input');
 const container = document.getElementById('blog-posts');
 
 // Render an array of post objects
-tdfunction renderPosts(posts) {
+function renderPosts(posts) {
   container.innerHTML = '';
   posts.forEach(post => {
     const article = document.createElement('article');
@@ -35,12 +35,15 @@ form.addEventListener('submit', async (e) => {
   const text = input.value.trim();
   if (!text) return;
 
-  await db.collection('posts').add({
-    content: text,
-    timestamp: Date.now()
-  });
-
-  input.value = '';
+  try {
+    await db.collection('posts').add({
+      content: text,
+      timestamp: Date.now()
+    });
+    input.value = '';
+  } catch (err) {
+    console.error('Error adding post:', err);
+  }
 });
 
 // Initialize listener
