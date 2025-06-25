@@ -1,45 +1,47 @@
 // script.js
-// Handles dynamic posting and localStorage persistence
+// Handles dynamic posting with Firestore persistence
 
-// Load existing posts or initialize empty array
-const saved = localStorage.getItem('posts');
-let posts = saved ? JSON.parse(saved) : [];
+const form = document.getElementById('post-form');
+const input = document.getElementById('post-input');
+const container = document.getElementById('blog-posts');
 
-// Render posts into the DOM
-function renderPosts(posts) {
-  const container = document.getElementById('blog-posts');
+// Render an array of post objects
+tdfunction renderPosts(posts) {
   container.innerHTML = '';
   posts.forEach(post => {
     const article = document.createElement('article');
     article.className = 'post';
     article.innerHTML = `
-      <small>${post.date}</small>
+      <small>${new Date(post.timestamp).toLocaleString()}</small>
       <p>${post.content}</p>
     `;
     container.appendChild(article);
   });
 }
 
-// Initial render
-renderPosts(posts);
+// Fetch and listen for updates from Firestore
+function subscribePosts() {
+  db.collection('posts')
+    .orderBy('timestamp', 'desc')
+    .onSnapshot(snapshot => {
+      const posts = snapshot.docs.map(doc => doc.data());
+      renderPosts(posts);
+    });
+}
 
-// Handle new post submissions
-document.getElementById('post-form').addEventListener('submit', function(e) {
+// Add a new post to Firestore
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const input = document.getElementById('post-input');
   const text = input.value.trim();
   if (!text) return;
 
-  const newPost = {
-    date: new Date().toLocaleString(),
-    content: text
-  };
+  await db.collection('posts').add({
+    content: text,
+    timestamp: Date.now()
+  });
 
-  // Add new post to front, save, and re-render
-  posts.unshift(newPost);
-  localStorage.setItem('posts', JSON.stringify(posts));
-  renderPosts(posts);
-
-  // Clear input
   input.value = '';
 });
+
+// Initialize listener
+subscribePosts();
