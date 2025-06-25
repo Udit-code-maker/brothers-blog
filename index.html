@@ -2,14 +2,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Blog</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brother Write</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 </head>
 <body>
   <header>
-    <h1>Welcome to My Blog</h1>
+    <h1>Brother Write</h1>
     <nav>
       <a href="#home">Home</a>
       <a href="#about">About</a>
@@ -18,7 +21,7 @@
   </header>
 
   <main>
-    <!-- 1️⃣ New post form -->
+    <!-- New post form -->
     <section id="new-post">
       <form id="post-form">
         <textarea id="post-input" placeholder="What's on your mind?" required></textarea>
@@ -26,15 +29,31 @@
       </form>
     </section>
 
-    <!-- 2️⃣ Posts will be injected here -->
+    <!-- Posts will be injected here -->
     <section id="blog-posts"></section>
   </main>
 
   <footer>
-    <p>&copy; 2025 My Blog</p>
+    <p>&copy; 2025 Brother Write</p>
   </footer>
 
-  <!-- Include the posting script -->
+  <!-- Firebase and app script -->
+  <script>
+    // Firebase configuration from Firebase console
+    const firebaseConfig = {
+      apiKey: "AIzaSyCd_NQXvQiwHOHN4qhp5XvdYgNYFcY6Lco",
+      authDomain: "brothers-write.firebaseapp.com",
+      databaseURL: "https://brothers-write-default-rtdb.firebaseio.com",
+      projectId: "brothers-write",
+      storageBucket: "brothers-write.firebasestorage.app",
+      messagingSenderId: "171317438341",
+      appId: "1:171317438341:web:e2f86ea570d969ee38c6ec",
+      measurementId: "G-KBMJEKCKQM"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
